@@ -15,7 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('advertisements', \App\Http\Controllers\AdvertisementController::class);
+Route::resource('photos', \App\Http\Controllers\PhotoController::class)->only(['destroy']);
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});

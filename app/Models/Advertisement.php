@@ -10,6 +10,7 @@ class Advertisement extends Model
     use HasFactory;
 
     protected $table = 'advertisements';
+    protected $fillable = ['title', 'description'];
 
     public function photos()
     {
