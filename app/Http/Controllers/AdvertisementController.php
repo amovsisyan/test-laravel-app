@@ -73,8 +73,16 @@ class AdvertisementController extends Controller
         $entity = Advertisement::find($id);
         $updateData = $request->only('title', 'description');
         $entity->update($updateData);
+        $instancePhotos = $entity->photos();
 
-        return response()->json($entity);
+        if (isset($request->photos)) {
+            foreach ($request->photos as $photo) {
+                $uploadedLink = Storage::disk('public')->put($entity->id, $photo);
+                $instancePhotos->create(['url' => $uploadedLink]);
+            }
+        }
+
+        return response()->json(Advertisement::with('photos')->find($entity->id));
     }
 
     /**
