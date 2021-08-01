@@ -1,3 +1,7 @@
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+
+As you can see this is app written using Laravel framework.
+
 Steps to start
 - First copy .env.example and have your .env file, change and configure for your local environment. (DB, app_url ...)
 - run composer install and pull all related dependencies.
