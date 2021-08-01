@@ -28,7 +28,7 @@ class Store extends ApiRequestCombined
             'title' => ['required', 'string', 'max:' . DBTablesConstants::ADVERTISEMENTS_TABLE_MAX_LENGTHS['title']],
             'description' => ['required', 'string', 'max:' . DBTablesConstants::ADVERTISEMENTS_TABLE_MAX_LENGTHS['description']],
             'photos' => ['array'],
-            'photos.*' => ['array', 'image', 'size:5120'],
+            'photos.*' => ['mimes:jpeg,jpg,png', 'max:5120'],
         ];
     }
 }

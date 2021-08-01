@@ -7,6 +7,7 @@ use App\Http\Requests\Advertisement\Store;
 use App\Http\Requests\Advertisement\Show;
 use App\Http\Requests\Advertisement\Update;
 use App\Models\Advertisement;
+use Illuminate\Support\Facades\Storage;
 
 class AdvertisementController extends Controller
 {
@@ -32,9 +33,17 @@ class AdvertisementController extends Controller
     public function store(Store $request)
     {
         $createData = $request->only('title', 'description');
-        $new = Advertisement::create($createData); // todo add with photos
+        $new = Advertisement::create($createData);
+        $instancePhotos = $new->photos();
 
-        return response()->json($new);
+        if (isset($request->photos)) {
+            foreach ($request->photos as $photo) {
+                $uploadedLink = Storage::disk('public')->put($new->id, $photo);
+                $instancePhotos->create(['url' => $uploadedLink]);
+            }
+        }
+
+        return response()->json(Advertisement::with('photos')->find($new->id));
     }
 
     /**
