@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Photo\Destroy;
+use App\Models\Advertisement;
+use App\Models\Photo;
 use Illuminate\Http\Request;
 
 class PhotoController extends Controller
@@ -75,10 +78,13 @@ class PhotoController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Destroy $request)
     {
-        //
+        $id = $request->photo;
+        $entity = Photo::find($id)->delete();
+
+        return response()->json(['deleted' => $entity]);
     }
 }
