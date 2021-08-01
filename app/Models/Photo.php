@@ -11,9 +11,15 @@ class Photo extends Model
 
     protected $table = 'photos';
     protected $fillable = ['url'];
+    protected $appends = array('urlabs');
 
     public function advertisement()
     {
         return $this->hasMany(Advertisement::class, 'advertisement_id', 'id');
+    }
+
+    public function getUrlabsAttribute()
+    {
+        return asset('storage/' . $this->url);
     }
 }
